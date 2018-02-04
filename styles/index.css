@@ -1,0 +1,49 @@
+body{
+  background-color: #D8F6CE;
+}
+
+h1{
+  color: red;
+  font-family: "Times New Roman", Times, serif;
+}
+
+#ventanaPrincipal,#datosUsuarios,#ventanaOpciones,#ventanaRegistro,#errorLogin,#ventanaPausa,#ventanaGanar
+,#ventanaMuerte,#ventanaRecord{
+  display: none;
+}
+
+.hide-close .ui-dialog-titlebar-close {
+  display: none;
+}
+
+#datosUsuarios{
+  height: 100px;
+}
+
+.box{
+  border: 2px solid blue;
+  border-radius: 10px;
+  background: #CEECF5;
+  text-align: center;
+  height: 600px;
+}
+
+img{
+  border-radius: 40%;
+  height: 100px;
+  width: 100px;
+}
+
+input[type='button']{
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.ui-dialog{
+  background: green;
+  background-color: green;
+}
+
+#errorRegistro, #errorLogin{
+  color: red;
+}

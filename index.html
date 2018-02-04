@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Soldado</title>
+  <!-- BOOTSTRAP -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <!-- BOOTSTRAP -->
+  <!-- CSS -->
+    <link rel="stylesheet" href="styles/index.css" media="screen">
+  <!-- Jquery UI -->
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="http://code.jquery.com/ui/1.10.1/themes/base/jquery-ui.css" />
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.1/jquery-ui.js"></script>
+  <!-- Jquery UI -->
+  <!-- JAVASACRIPT -->
+    <script type="text/javascript" src="scripts/usuario.js"></script>
+    <script type="text/javascript" src="scripts/index.js"></script>
+<!-- Juego -->
+    <script type="text/javascript" src="scripts/phaser.min.js"></script>
+    <script type="text/javascript" src="scripts/entorno/sonidos.js"></script>
+    <script type="text/javascript" src="scripts/entorno/cronometro.js"></script>
+    <script type="text/javascript" src="scripts/entorno/torre.js"></script>
+    <script type="text/javascript" src="scripts/entorno/euros.js"></script>
+    <script type="text/javascript" src="scripts/entorno/campo.js"></script>
+    <script type="text/javascript" src="scripts/objetos/corazones.js"></script>
+    <script type="text/javascript" src="scripts/objetos/objetoEuros.js"></script>
+    <script type="text/javascript" src="scripts/personajes/soldado.js"></script>
+    <script type="text/javascript" src="scripts/monstruos/MomiaRobotica.js"></script>
+    <script type="text/javascript" src="scripts/monstruos/robotVolador.js"></script>
+    <script type="text/javascript" src="scripts/game.js"></script>
+<!-- Juego -->
+</head>
+<body onload="loadPage()">
+  <div class="container">
+    <div class="row">
+      <div id="datosUsuarios" class="col-md-4 col-md-offset-4 box">
+        <div class="row">
+          <h2 id="nombreIdentidad" class="col-md-7 nombreIdentidad"></h2>
+          <img id="miAvatar" alt="Avatar" class="col-md-5 miAvatar">
+        </div>
+      </div>
+      <div id="ventanaLogin" class="col-md-4 col-md-offset-4 box">
+        <h1>SOLDADO</h1>
+        <form>
+          <fieldset class="row">
+              <legend><h2>Entrar a la cuenta</h2></legend>
+              <label id="errorLogin">Dicho usuario o contraseña no son correctos. Vuelva a intentarlo.</label>
+              <label for="nombre" class="col-md-12">Nombre</label>
+              <input type="text" id="nombre" placeholder="Nombre" class="col-md-12 form-control"/>
+              <label for="password" class="col-md-12">Contraseña</label>
+              <input type="password" id="password" placeholder="Contraseña" class="col-md-12 form-control"/>
+              <input type="button" id="enter" value="ENTRAR" onclick="hacerLogin()" class="col-md-12 btn btn-success"/>
+          </fieldset>
+          <br>
+          <input type="button" id="registro" class="col-md-5 btn btn-info" value="Registro" onclick="abrirRegistro()">
+          <input type="button" id="record" class="col-md-5 col-md-offset-2 btn btn-info" value="Record" onclick="ventanaRecord()">
+      </form>
+    </div>
+    <div id="ventanaPrincipal" class="col-md-4 col-md-offset-4 box">
+      <h1>SOLDADO</h1>
+      <div class="row">
+        <h2 id="nombreIdentidad" class="col-md-7 nombreIdentidad"></h2>
+        <img id="miAvatar" alt="Avatar" class="col-md-5 miAvatar">
+        <h5 id="recordBEBE"></h5>
+        <h5 id="recordDECENTE"></h5>
+        <h5 id="recordVICIADO"></h5>
+        <input type="button" value="Jugar" onclick="iniciarJuego()" class="col-md-12 btn btn-success">
+        <input type="button" value="Opciones" onclick="mostrarOpciones()" class="col-md-12 btn btn-success">
+      </div>
+    </div>
+    <div id="ventanaOpciones" class="col-md-4 col-md-offset-4 box">
+      <div class="row">
+        <h3 id="dificultad">D</h3>
+        <h5 id="descripcionDificultad">D</h5>
+        <div class="btn-group btn-group-justified col-md-12">
+         <a class="btn btn-warning" onclick="nivelBebe()">BEBE</a>
+         <a class="btn btn-primary" onclick="nivelDecente()">DECENTE</a>
+         <a class="btn btn-danger" onclick="nivelViciado()">VICIADO</a>
+        </div>
+        <input type="button" class="btn btn-success" value="GUARDAR OPCIONES" onclick="guardarOpciones()">
+        <br>
+        <input type="button" class="btn btn-success" value="VOLVER MENU PRINCIPAL" onclick="mostrarPrincipal()">
+      </div>
+    </div>
+    <div id="ventanaRegistro">
+      <form class="box">
+        <fieldset class="row">
+            <legend>Crear cuenta nueva</legend>
+            <label id="errorRegistro">No cumple todos los requisitos para registrarse o dicho usuario ya existe. Intentelo de nuevo.</label>
+            <label for="r_nombre" class="col-md-12">Nombre</label>
+            <input type="text" id="r_nombre" placeholder="Nombre" class="col-md-12 form-control"/>
+            <label for="r_password" class="col-md-12">Contraseña</label>
+            <input type="password" id="r_password" placeholder="Contraseña" class="col-md-12 form-control"/>
+            <label for="r_repetir" class="col-md-12">Repita contraseña</label>
+            <input type="password" id="r_repetir" placeholder="Repita contraseña" class="col-md-12 form-control"/>
+            <label for="r_email" class="col-md-12">Email</label>
+            <input type="email" id="r_email" placeholder="email" class="col-md-12 form-control"/>
+            <label for="r_emailrepetir" class="col-md-12">Repita email</label>
+            <input type="email" id="r_emailrepetir" placeholder="Repita email" class="col-md-12 form-control"/>
+            <label for="selectAvatar" class="col-md-12">Elige avatar.</label>
+            <img id="imgAvatar" alt="Avatar" class="col-md-7">
+            <select id="selectAvatar" onchange="changeAvatar()" class="btn btn-success col-md-5">
+              <option value="simple">Simple</option>
+              <option value="Dead">Dead</option>
+              <option value="Diablo">Diablo</option>
+              <option value="Ace">Ace</option>
+            </select>
+            <input type="button" id="registrar" value="REGISTRARSE" class="col-md-12 btn btn-success" onclick="hacerRegistro()">
+            <input type="submit" value="BORRAR" class="col-md-12 btn btn-success">
+        </fieldset>
+    </form>
+    </div>
+    </div>
+  </div>
+    <div id="ventanaPausa">
+      <h4>¿Qué quieres hacer?</h4>
+    </div>
+    <div id="ventanaGanar">
+      <h4 id="nivelTerminado"></h4>
+    </div>
+    <div id="ventanaMuerte">
+      <img class="miAvatar"  alt="Personaje muerto">
+    </div>
+    <div id="ventanaRecord">
+      <ol id="listaRecord">
+
+      </ol>
+    </div>
+</body>
+</html>
